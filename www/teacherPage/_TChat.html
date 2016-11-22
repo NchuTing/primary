@@ -1,0 +1,231 @@
+<style>
+    .li {
+        background-color: white;
+        border: none;
+        line-height: 30px;
+        !important;
+    }
+    
+    .myLi {
+        display: inline-block;
+        margin: 20px 10px 0 10px;
+        color: white;
+        font-size: 14px;
+        text-align: center;
+    }
+    
+    .myLi span {
+        margin: 15px 0 0 0
+    }
+    
+    .load {
+        width: 100%;
+        height: 30px;
+        margin: 10px 0 50px 0;
+        text-align: center;
+        line-height: 30px;
+        color: white;
+        clear: both;
+    }
+    /*.top{*/
+    /*width:50px;*/
+    /*height:30px;*/
+    /*border-radius: 5px;*/
+    /*background-color:rgba(225,225,225,0.3);*/
+    /*color:white;*/
+    /*position: fixed;*/
+    /*bottom:100px;*/
+    /*right:10%;*/
+    /*line-height: 30px;*/
+    /*text-align: center;*/
+    /*display: none;*/
+    /*z-index:99;*/
+    /*}*/
+    
+    #wrapper {
+        position: absolute;
+        right: 0;
+        left: 0;
+        z-index: 1;
+        min-height: 80%;
+        width: 90%;
+        margin: 0 auto;
+    }
+    
+    .scroller {
+        position: absolute;
+        z-index: 1;
+        /*    -webkit-touch-callout:none;*/
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        width: 100%;
+        padding: 0;
+    }
+    
+    .scroller ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        text-align: left;
+    }
+    
+    .scroller li {
+        min-height: 70px;
+        /*background-color: #fafafa;*/
+        font-size: 14px;
+    }
+    
+    .pullDown,
+    .pullUp {
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+        font-size: 12px;
+        color: white;
+        font-family: Arial, Microsoft YaHei;
+    }
+    
+    .pullUp {
+        display: block;
+    }
+    
+    .loader {
+        display: inline-block;
+        font-size: 0px;
+        padding: 0px;
+        display: none;
+    }
+    
+    .loader span {
+        vertical-align: middle;
+        border-radius: 100%;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin: 0 2px;
+        -webkit-animation: loader 0.8s linear infinite alternate;
+        animation: loader 0.8s linear infinite alternate;
+    }
+    
+    .loader span:nth-child(1) {
+        -webkit-animation-delay: -1s;
+        animation-delay: -1s;
+        background: rgba(245, 103, 115, 0.6);
+    }
+    
+    .loader span:nth-child(2) {
+        -webkit-animation-delay: -0.8s;
+        animation-delay: -0.8s;
+        background: rgba(245, 103, 115, 0.8);
+    }
+    
+    .loader span:nth-child(3) {
+        -webkit-animation-delay: -0.26666s;
+        animation-delay: -0.26666s;
+        background: rgba(245, 103, 115, 1);
+    }
+    
+    .loader span:nth-child(4) {
+        -webkit-animation-delay: -0.8s;
+        animation-delay: -0.8s;
+        background: rgba(245, 103, 115, 0.8);
+    }
+    
+    .loader span:nth-child(5) {
+        -webkit-animation-delay: -1s;
+        animation-delay: -1s;
+        background: rgba(245, 103, 115, 0.4);
+    }
+    
+    @keyframes loader {
+        from {
+            transform: scale(0, 0);
+        }
+        to {
+            transform: scale(1, 1);
+        }
+    }
+    
+    @-webkit-keyframes loader {
+        from {
+            -webkit-transform: scale(0, 0);
+        }
+        to {
+            -webkit-transform: scale(1, 1);
+        }
+    }
+</style>
+<script src="//cdn.bootcss.com/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js"></script>
+
+<body>
+    <img src="images/none.gif" style="width:90%;margin:0 auto;position: fixed;top:90px;z-index:2;display:none;" />
+    <div ng-controller="myCtrl1">
+        <div id="wrapper" class="row">
+            <ul>
+                <li ng-repeat="(key,val) in obj" ng-click="back()">
+                    <div class="story" data-toggle="modal" data-target="#myModal" ng-click="select()" style="color:white;margin-bottom:10px;{{val.bg}}">
+                        <div class="opbtn"></div>
+                        <span class="story_time">{{val.creatdate}}</span>
+                        <span style="float:right">{{val.timbs}}</span>
+                        <span class="glyphicon glyphicon-thumbs-up" style="color:white;float:right;" ng-click="timbs($event)"></span>
+                        <p class="story_t">{{val.name}}</p>
+                        <p class="story_m">{{val.content}}</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="row" style="position:fixed;z-index:2;left:0;right:0;bottom:0;height:50px;background-color:#3E7A77;">
+            <div style="width:100%;position: absolute;bottom: 10px;">
+                <span class="glyphicon glyphicon-pencil col-xs-1" style="color:#e5e5e5;"></span>
+                <input class="col-xs-8" type="text" value="写评论" id="input" style='padding-left:5px;outline:none;padding:0;color:white;background-color:rgba(255,255,255,0);border-left:0px;border-top:0px;border-right:0px;border-bottom:1px solid white'>
+                <span class="btn btn-default col-xs-2" style="color:white;background-color:rgba(255,255,255,0.2);padding:0;margin-left:5px;" ng-click="fabu()">发布</span>
+            </div>
+        </div>
+
+
+
+        <!-- Modal -->
+        <div class="modal fade bs-example-modal-sm text-center" id="myModal" myAttr="" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" style="top:220px;">
+                <div class="modal-content">
+                    <ul class="list-group" style="color:#c3c3c3;margin-bottom:0;">
+                        <li class="li" ng-click="answer()">回复评论</li>
+                        <li class="li" ng-click="share()">分享评论</li>
+                        <li class="li">复制评论</li>
+                        <li class="li">举报评论</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="myDiv2" ng-click="back()" style="padding: 0;position:fixed;bottom: 0;z-index: 99;display: none;width:100%;height:646px;"></div>
+        <div id="myDiv" style="width:100%;height:100px;background: url('images/blli.jpg') 0 100px;position:fixed;bottom:0;left:0;z-index:100;display: none">
+            <ul>
+                <li class="myLi">
+                    <a href="http://openapi.qzone.qq.com/oauth/qzoneoauth_authorize?oauth_consumer_key=222011&oauth_token=16737615709618344191&oauth_callback=http%3A%2F%2Fwww.paidai.com%2Fuser%2Foauth_qq.php%3Fstep%3D4%26secret%3DREpdMCDC2pInc5pa">
+                        <img src="images/qq.jpg" width='50px' height="50px" />
+                    </a>
+                    <br />
+                    <span>qq</span>
+                </li>
+                <li class="myLi">
+                    <a href="https://mp.weixin.qq.com/"><img src="images/weixin.jpg" width='50px' height="50px" /></a>
+                    <br />
+                    <span>微信</span>
+                </li>
+                <li class="myLi">
+                    <a href="https://passport.weibo.cn/signin/welcome?entry=mweibo&r=http%3A%2F%2Fpad.weibo.cn%2F&_T_WM=669231e591d5c024d7ca7bbb1ab1b0e9">
+                        <img src="images/weibo.jpg" width='50px' height="50px" />
+                    </a>
+                    <br />
+                    <span>微博</span>
+                </li>
+                <li class="myLi">
+                    <a href="http://qzone.qq.com/"><img src="images/qzone.jpg" width='50px' height="50px" /></a>
+                    <br />
+                    <span>qq空间</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="js/_TChat.js"></script>
+</body>

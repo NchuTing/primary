@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+
+
+
+    <div style="word-break:break-all;width:100%">sfsdhjgsdkjgkjdngkvsjdfngkjsdfnbjdgkjl;ekmglvkdnfbknfgvbksdhgbuhdbgvkjdsfmbgvjdskfbgksjdbvijkdbsjvksdknvbjksdfbjkskfbnlksdjfnbkvls sfsdhjgsdkjgkjdngkvsjdfngkjsdfnbjdgkjl;ekmglvkdnfbknfgvbksdhgbuhdbgvkjdsfmbgvjdskfbgksjdbvijkdbsjvksdknvbjksdfbjkskfbnlksdjfnbkvls sfsdhjgsdkjgkjdngkvsjdfngkjsdfnbjdgkjl;ekmglvkdnfbknfgvbksdhgbuhdbgvkjdsfmbgvjdskfbgksjdbvijkdbsjvksdknvbjksdfbjkskfbnlksdjfnbkvls
+
+    </div>
+    <p>sfsdhjgsdkjgkjdngkvsjdfngkjsdfnbjdgkjl;ekmglvkdnfbknfgvbksdhgbuhdbgvkjdsfmbgvjdskfbgksjdbvijkdbsjvksdknvbjksdfbjkskfbnlksdjfnbkvls sfsdhjgsdkjgkjdngkvsjdfngkjsdfnbjdgkjl;ekmglvkdnfbknfgvbksdhgbuhdbgvkjdsfmbgvjdskfbgksjdbvijkdbsjvksdknvbjksdfbjkskfbnlksdjfnbkvls sfsdhjgsdkjgkjdngkvsjdfngkjsdfnbjdgkjl;ekmglvkdnfbknfgvbksdhgbuhdbgvkjdsfmbgvjdskfbgksjdbvijkdbsjvksdknvbjksdfbjkskfbnlksdjfnbkvls
+    </p>
+
+
+
+
+<script type="application/javascript">
+    var str="abbbbbffffffklohhhhh";
+    var obj={};
+    for(var i=0;i<str.length;i++){
+           var value=str.charAt(i);
+        if(obj[value]&&obj[value].value==value){
+            obj[value].count=++obj[value].count;
+        }
+else{
+            obj[value]={};
+            obj[value].count=1;
+            obj[value].value=value;
+        }
+    }
+    for(var key in obj){
+        document.write(obj[key].value+'='+obj[key].count+' ');
+    }
+
+</script>
+</body>
+
+</html>
